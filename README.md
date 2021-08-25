@@ -6,6 +6,12 @@ of enums for lookups, hidden behind a special dict subclass. This allows enum
 definitions to remain tidy, and avoids having to define instance-specific configuration
 as property functions.
 
+### Installation
+
+```shell
+$ python3 -m pip install enum-prop
+```
+
 ### Usage
 
 ```python
