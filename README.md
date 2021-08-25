@@ -1,5 +1,9 @@
 <h1 align=center>enum-prop</h1>
 
+<p align=center>
+    <a href=https://github.com/5m/enum-prop/actions?query=workflow%3ACI+branch%3Amain><img src=https://github.com/5m/enum-prop/workflows/CI/badge.svg alt="CI Build Status"></a>
+</p>
+
 Enum definitions can't, for good reasons, reference instances of themselves within their
 own definitions. This module allows definitions to come around that by mapping the names
 of enums for lookups, hidden behind a special dict subclass. This allows enum
