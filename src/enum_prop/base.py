@@ -7,9 +7,6 @@ from typing import Generic
 from typing import Mapping
 from typing import TypeVar
 
-__version__ = "0.0.0a1"
-__all__ = ("enum_property", "enum_getter")
-
 K = TypeVar("K")
 V = TypeVar("V")
 
