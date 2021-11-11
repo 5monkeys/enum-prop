@@ -28,6 +28,8 @@ class enum_property(Generic[V]):
 
     def __get__(self, instance: Enum, owner: type[Enum]) -> V:
         assert self.bound_name is not None
+        if instance is None:
+            return self
         try:
             return self.mapping[instance]
         except KeyError as e:
