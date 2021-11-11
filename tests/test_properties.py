@@ -6,6 +6,7 @@ import pytest
 
 from enum_prop import enum_property
 
+from django.db.models import IntegerChoices, TextChoices
 
 def test_can_define_property() -> None:
     class A(enum.Enum):
@@ -29,3 +30,23 @@ def test_incomplete_mapping_raises_attribute_error() -> None:
 
     with pytest.raises(AttributeError, match=r"B.b has no attribute 'val'"):
         B.b.val
+
+
+def test_django_choices():
+    class D(TextChoices):
+        LOW = "one", "test"
+        MEDIUM = "two",
+        HIGH = "three",
+        colour = enum_property({LOW: "green", MEDIUM: "yellow", HIGH: "red"})
+
+    assert D.LOW.colour == "green"
+    assert D.MEDIUM.colour == "yellow"
+
+    class E(IntegerChoices):
+        LOW = 1, "test"
+        MEDIUM = 2,
+        HIGH = 3,
+        colour = enum_property({LOW: "green", MEDIUM: "yellow", HIGH: "red"})
+
+    assert D.LOW.colour == "green"
+    assert D.MEDIUM.colour == "yellow"
