@@ -29,3 +29,12 @@ def test_incomplete_mapping_raises_attribute_error() -> None:
 
     with pytest.raises(AttributeError, match=r"B.b has no attribute 'val'"):
         B.b.val
+
+def test_getting_enum_property() -> None:
+    class C(enum.Enum):
+        a = "a"
+        b = "b"
+        val = enum_property({a: 1, b: 2})
+
+    assert C.val
+    assert C.val.bound_name is "val"
