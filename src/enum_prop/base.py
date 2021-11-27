@@ -7,12 +7,21 @@ from typing import Generic
 from typing import Mapping
 from typing import TypeVar
 
+from django.db import models
+
+import inspect
+
 K = TypeVar("K")
 V = TypeVar("V")
 
 
 class EnumDict(dict[K, V], Generic[K, V]):
     def __getitem__(self, item: K | Enum) -> V:
+        if isinstance(item, models.IntegerChoices) or isinstance(item, models.TextChoices):
+            try:
+                return super().__getitem__((item.value,))
+            except KeyError:
+                return super().__getitem__((item.value, item.label))
         if isinstance(item, Enum):
             return super().__getitem__(item.value)
         return super().__getitem__(item)
